@@ -50,7 +50,7 @@ const mergeVideos = async (req, res) => {
         buffer: mergedVideoBuffer
       });
 
-      res.json({ message: 'Videos merged successfully', video: mergedVideo });
+      res.json({ message: 'Videos merged successfully !', video: mergedVideo });
     });
   } catch (error) {
     res.status(500).json({ error: 'Internal server error', details: error.message });
