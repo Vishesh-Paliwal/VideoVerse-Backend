@@ -28,7 +28,7 @@ app.use('/auth', authRoutes);
 app.use('/upload',authMiddleware, uploadRoutes);  
 app.use('/trim', authMiddleware, trimRoutes);
 app.use('/merge', authMiddleware, mergeRoutes);
-// app.use('/share', authMiddleware, shareRoutes);
+app.use('/share', authMiddleware, shareRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
