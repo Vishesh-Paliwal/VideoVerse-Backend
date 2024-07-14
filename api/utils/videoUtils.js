@@ -39,10 +39,6 @@ const checkVideoDuration = (buffer) => {
   });
 };
 
-// const ffmpeg = require('fluent-ffmpeg');
-// const tmp = require('tmp');
-// const fs = require('fs');
-
 const trimVideoFile = (buffer, startTime, endTime) => {
   return new Promise((resolve, reject) => {
     tmp.file({ postfix: '.mp4' }, (err, path, fd, cleanupCallback) => {

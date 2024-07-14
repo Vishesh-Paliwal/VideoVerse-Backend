@@ -1,5 +1,5 @@
 const express = require('express');
-const { generateShareLink, accessSharedLink } = require('../controllers/shareControleer');
+const { generateShareLink, accessSharedLink } = require('../controllers/shareController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const router = express.Router();
 
