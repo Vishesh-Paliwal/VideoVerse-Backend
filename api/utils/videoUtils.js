@@ -39,4 +39,58 @@ const checkVideoDuration = (buffer) => {
   });
 };
 
-module.exports = { checkVideoDuration};
+// const ffmpeg = require('fluent-ffmpeg');
+// const tmp = require('tmp');
+// const fs = require('fs');
+
+const trimVideoFile = (buffer, startTime, endTime) => {
+  return new Promise((resolve, reject) => {
+    tmp.file({ postfix: '.mp4' }, (err, path, fd, cleanupCallback) => {
+      if (err) {
+        return reject(err);
+      }
+
+      fs.writeFile(path, buffer, (err) => {
+        if (err) {
+          cleanupCallback();
+          return reject(err);
+        }
+
+        tmp.file({ postfix: '.mp4' }, (err, outputPath, outputFd, outputCleanupCallback) => {
+          if (err) {
+            cleanupCallback();
+            return reject(err);
+          }
+
+          ffmpeg(path)
+            .setStartTime(startTime)
+            .setDuration(endTime - startTime)
+            .output(outputPath)
+            .on('end', () => {
+              fs.readFile(outputPath, (err, trimmedBuffer) => {
+                if (err) {
+                  cleanupCallback();
+                  outputCleanupCallback();
+                  return reject(err);
+                }
+
+                cleanupCallback();
+                outputCleanupCallback();
+                resolve(trimmedBuffer);
+              });
+            })
+            .on('error', (err) => {
+              cleanupCallback();
+              outputCleanupCallback();
+              reject(err);
+            })
+            .run();
+        });
+      });
+    });
+  });
+};
+
+module.exports = { checkVideoDuration, trimVideoFile };
+
+//module.exports = { checkVideoDuration};
