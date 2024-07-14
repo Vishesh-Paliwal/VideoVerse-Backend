@@ -5,20 +5,17 @@ const { MIN_VIDEO_DURATION, MAX_VIDEO_DURATION } = require('../../config/config'
 
 const checkVideoDuration = (buffer) => {
   return new Promise((resolve, reject) => {
-    // Create a temporary file
     tmp.file({ postfix: '.mp4' }, (err, path, fd, cleanupCallback) => {
       if (err) {
         return reject(err);
       }
 
-      // Write the buffer to the temporary file
       fs.writeFile(path, buffer, (err) => {
         if (err) {
           cleanupCallback();
           return reject(err);
         }
 
-        // Use ffmpeg to check the video duration
         ffmpeg.ffprobe(path, (err, metadata) => {
           if (err) {
             cleanupCallback();
@@ -35,11 +32,11 @@ const checkVideoDuration = (buffer) => {
 
           console.log("util resolved");
           cleanupCallback();
-          resolve();
+          resolve(duration);
         });
       });
     });
   });
 };
 
-module.exports = { checkVideoDuration };
+module.exports = { checkVideoDuration};
