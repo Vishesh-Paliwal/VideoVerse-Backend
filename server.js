@@ -24,7 +24,7 @@ const shareRoutes = require('./api/routes/shareRoutes');
 
 // Apply authentication middleware to all routes except authRoutes
 app.use('/auth', authRoutes);
-// app.use('/upload', authMiddleware, uploadRoutes);
+app.use('/upload',authMiddleware, uploadRoutes);  
 // app.use('/trim', authMiddleware, trimRoutes);
 // app.use('/merge', authMiddleware, mergeRoutes);
 // app.use('/share', authMiddleware, shareRoutes);
