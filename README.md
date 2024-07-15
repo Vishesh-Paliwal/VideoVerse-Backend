@@ -53,7 +53,49 @@ STEP 2:
     
         curl -X POST http://localhost:3000/auth/login -H "Content-Type: application/json" -d '{"username":"admin", "password":"password"}'
 
-NOW ALL THE API DOCUMENTATION IS DONE VIA SWAGGER AND CAN BE EASILY FOUND AT : http://localhost:3000/api-docs
+STEP 3:
+
+  * Now for all the api calls add header to them :
+
+            Authorization : Your generated token
+
+   Upload Video :
+
+   > Post request at http://localhost:3000/upload
+
+   > Body : form -data , (key : video , value: select video)
+
+  ![Screenshot from 2024-07-15 15-13-58](https://github.com/user-attachments/assets/b1634a74-279d-47fd-8551-abb615aedd07)
+
+
+   Merge Video :
+
+   > Post request at http://localhost:3000/merge
+
+   > Additional Header : Content-Type : application/json
+
+   > Body : {
+              "videoIds": [1, 2]
+            }
+
+  ![Screenshot from 2024-07-15 15-32-45](https://github.com/user-attachments/assets/cfeb0d17-c765-4b61-b330-294f90462897)
+
+
+   Trim Video :
+
+   > Post request at http://localhost:3000/trim
+
+   > Additional Header : Content-Type : application/json
+
+   > Body :{
+  "videoId" : 1,
+  "startTime":3,
+  "endTime":10
+}
+
+  ![Screenshot from 2024-07-15 15-47-51](https://github.com/user-attachments/assets/ed4d9b03-7b92-496f-91a3-50194e9de035)
+
+
 
 YOU CAN RUN ALL TESTS USING :
 
