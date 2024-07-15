@@ -58,3 +58,7 @@ NOW ALL THE API DOCUMENTATION IS DONE VIA SWAGGER AND CAN BE EASILY FOUND AT : h
 YOU CAN RUN ALL TESTS USING :
 
         npm test
+
+![Screenshot from 2024-07-15 14-46-42](https://github.com/user-attachments/assets/f0d8a866-084d-490b-95e6-c4580c532bf1)
+
+ 
