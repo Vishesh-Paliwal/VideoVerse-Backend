@@ -7,6 +7,8 @@ const sequelize = require('../../database/db');
 const uploadRoutes = require('../../api/routes/uploadRoutes');
 const Video = require('../../api/models/Video');
 const { checkVideoDuration } = require('../../api/utils/videoUtils');
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIxMDI3NDE1LCJleHAiOjE3MjE3NDc0MTV9.OWHPmaxcFFOR4yZu25NU6FW9hOzP0I7WZpRL2aqgyT4'
+
 
 jest.mock('../../api/models/Video');
 jest.mock('../../api/utils/videoUtils');
@@ -42,7 +44,7 @@ describe('Upload Controller', () => {
       .post('/upload')
       .attach('video', Buffer.from('test buffer'), 'test.mp4')
       .set('Content-Type', 'multipart/form-data')
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIwOTgzOTY3LCJleHAiOjE3MjEwMjcxNjd9.uPHOZzjW7UPWOeIWt7ymtt3s8mORKTylYFvV9bFuQ44');
+      .set('Authorization', token);
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe('Video uploaded successfully');
@@ -52,8 +54,7 @@ describe('Upload Controller', () => {
   it('should return 400 if no video file uploaded', async () => {
     const response = await request(app)
       .post('/upload')
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIwOTgzOTY3LCJleHAiOjE3MjEwMjcxNjd9.uPHOZzjW7UPWOeIWt7ymtt3s8mORKTylYFvV9bFuQ44');
-
+      .set('Authorization',token)
     expect(response.status).toBe(400);
     expect(response.body.message).toBe('No video file uploaded');
   });
@@ -65,7 +66,7 @@ describe('Upload Controller', () => {
       .post('/upload')
       .attach('video', Buffer.from('test buffer'), 'test.mp4')
       .set('Content-Type', 'multipart/form-data')
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIwOTgzOTY3LCJleHAiOjE3MjEwMjcxNjd9.uPHOZzjW7UPWOeIWt7ymtt3s8mORKTylYFvV9bFuQ44');
+      .set('Authorization', token);
 
     expect(response.status).toBe(400);
     expect(response.body.message).toBe('Invalid video duration');
@@ -80,7 +81,7 @@ describe('Upload Controller', () => {
       .post('/upload')
       .attach('video', Buffer.from('test buffer'), 'test.mp4')
       .set('Content-Type', 'multipart/form-data')
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIwOTgzOTY3LCJleHAiOjE3MjEwMjcxNjd9.uPHOZzjW7UPWOeIWt7ymtt3s8mORKTylYFvV9bFuQ44');
+      .set('Authorization', token);
 
     expect(response.status).toBe(400);
     expect(response.body.message).toBe('Video creation failed');
@@ -91,7 +92,7 @@ describe('Upload Controller', () => {
       .post('/upload')
       .attach('video', Buffer.from('test buffer'), 'test.avi')
       .set('Content-Type', 'multipart/form-data')
-      .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNzIwOTgzOTY3LCJleHAiOjE3MjEwMjcxNjd9.uPHOZzjW7UPWOeIWt7ymtt3s8mORKTylYFvV9bFuQ44');
+      .set('Authorization', token);
 
     expect(response.status).toBe(400);
     expect(response.body.message).toBe('Only .mp4 files are allowed');
