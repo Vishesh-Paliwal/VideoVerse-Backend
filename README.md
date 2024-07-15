@@ -95,6 +95,22 @@ STEP 3:
 
   ![Screenshot from 2024-07-15 15-47-51](https://github.com/user-attachments/assets/ed4d9b03-7b92-496f-91a3-50194e9de035)
 
+  Share Video Link Generation:
+
+   > Post request at http://localhost:3000/share/generate
+
+   > Additional Header : Content-Type : application/json
+
+   > Body :{
+  "videoId": 1,
+  "expiryHours": 24
+ }
+ 
+ ![Screenshot from 2024-07-15 15-52-46](https://github.com/user-attachments/assets/ae464b37-a7d4-4ed2-89de-325b0c615558)
+
+NOW YOU CAN ACCESS VIDEO BY LINK PROVIDE :
+
+  ![Screenshot from 2024-07-15 15-56-32](https://github.com/user-attachments/assets/6fe24f62-d368-443c-a3c8-924a93534a9a)
 
 
 YOU CAN RUN ALL TESTS USING :
